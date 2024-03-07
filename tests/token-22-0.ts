@@ -61,11 +61,6 @@ describe("transfer-hook", () => {
     [Buffer.from("extra-account-metas"), mint.publicKey.toBuffer()],
     program.programId
   );
-  
-  const [counterPDA] = PublicKey.findProgramAddressSync(
-    [Buffer.from("counter")],
-    program.programId
-  );
 
   it("Create Mint Account with Transfer Hook Extension", async () => {
     const extensions = [ExtensionType.TransferHook];
@@ -153,8 +148,6 @@ describe("transfer-hook", () => {
   it("Create ExtraAccountMetaList Account", async () => {
     const extraAccountMetasInfo = await connection.getAccountInfo(extraAccountMetaListPDA);
     
-    console.log("Extra accounts meta: " + extraAccountMetasInfo);
-
     if (extraAccountMetasInfo === null) {
       const initializeExtraAccountMetaListInstruction = await program.methods
       .initializeExtraAccountMetaList()
@@ -198,7 +191,6 @@ describe("transfer-hook", () => {
     );
 
     console.log("Extra accounts meta: " + extraAccountMetaListPDA);
-    console.log("Counter PDa: " + counterPDA);
     console.log("Transfer Instruction: " + JSON.stringify(transferInstructionWithHelper));
     
     const transaction = new Transaction().add(

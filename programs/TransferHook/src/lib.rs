@@ -9,9 +9,10 @@ use anchor_spl::{
 use spl_tlv_account_resolution::state::ExtraAccountMetaList;
 use spl_transfer_hook_interface::instruction::{ExecuteInstruction, TransferHookInstruction};
 
-declare_id!("2TZUCnYWPsuEPECXLBb48yBZdeM4PhqNn49QQmPxkLHB");
+declare_id!("jGq9BAvKeQswSH2jwSRxFN3XRt8TSZ5RcZYsByGeFRp");
 
-const EXECUTION_SLOT: u64 = 282525600;
+const EXECUTION_SLOT: u64 = 283571561;
+
 
 #[error_code]
 pub enum Error {
@@ -69,6 +70,8 @@ pub mod transfer_hook {
 
         let current_slot_str = current_slot.to_string();
         msg!(&current_slot_str);
+        let execution_slot_str = EXECUTION_SLOT.to_string();
+        msg!(&execution_slot_str);
 
         if current_slot < EXECUTION_SLOT {
             return err!(Error::ExecutionSlotNotReached);
